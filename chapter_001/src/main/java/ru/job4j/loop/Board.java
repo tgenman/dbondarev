@@ -26,7 +26,6 @@ public class Board {
             }
             builder.append(line);
         }
-        System.out.println(builder.toString());
         return builder.toString();
     }
 }
