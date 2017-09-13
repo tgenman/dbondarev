@@ -1,11 +1,11 @@
-package ru.job4j;
+package ru.job4j.models;
 
 public class Item {
-    private String id;
-    private String name;
-    private String desc;
-    private long create;
-    private String comment;
+    public String id;
+    public String name;
+    public String desc;
+    public long create;
+    public String comment;
 
     public Item() {
     }
