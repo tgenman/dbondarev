@@ -1,10 +1,24 @@
 package ru.job4j.condition;
 
+/**
+ * Class to triangle.
+ * @author tgenman
+ * @version 1.0
+ */
 public class Triangle {
+    /** Point a. */
     private Point a;
+    /** Point b. */
     private Point b;
+    /** Point c. */
     private Point c;
 
+    /**
+     * Constructor.
+     * @param a Point
+     * @param b Point
+     * @param c Point
+     */
     public Triangle(Point a, Point b, Point c) {
         this.a = a;
         this.b = b;
@@ -52,9 +66,15 @@ public class Triangle {
      * @return Возможость построить треугольник с такими длинами сторон
      */
     private boolean exist(double ab, double ac, double bc) {
-        if ((ab + ac) <= bc) return false;
-        if ((ab + bc) <= ac) return false;
-        if ((ac + bc) <= ab) return false;
+        if ((ab + ac) <= bc) {
+            return false;
+        }
+        if ((ab + bc) <= ac) {
+            return false;
+        }
+        if ((ac + bc) <= ab) {
+            return false;
+        }
         return true;
     }
 }

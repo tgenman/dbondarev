@@ -12,6 +12,8 @@ import static org.junit.Assert.assertThat;
  */
 
 public class FactorialTest {
+
+    /** Check 5!. */
     @Test
     public void factorialFive() {
         Factorial example = new Factorial();
@@ -19,6 +21,7 @@ public class FactorialTest {
         assertThat(rsl, is(120));
     }
 
+    /** Check 0!. */
     @Test
     public void factorialZero() {
         Factorial example = new Factorial();

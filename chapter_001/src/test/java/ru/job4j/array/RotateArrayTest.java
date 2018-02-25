@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class RotateArrayTest {
+    /**
+     * Check rotation when array contain two row and two column.
+     */
     @Test
     public void whenRotateTwoRowTwoColArrayThenRotatedArray() {
         RotateArray example = new RotateArray();
@@ -20,6 +23,9 @@ public class RotateArrayTest {
         assertThat(resultArray, is(expectArray));
     }
 
+    /**
+     * Check rotation when array contain three row and three column.
+     */
     @Test
     public void whenRotateThreeRowThreeColArrayThenRotatedArray() {
         RotateArray example = new RotateArray();

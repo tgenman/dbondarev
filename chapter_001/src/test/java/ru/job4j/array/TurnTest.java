@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class TurnTest {
+    /**
+     * Check turning array with even elements.
+     */
     @Test
     public void whenTurnArrayWithEvenAmountOfElementsThenTurnedArray() {
         Turn example = new Turn();
@@ -19,7 +22,9 @@ public class TurnTest {
         int[] expectArray = {4, 3, 2, 1};
         assertThat(resultArray, is(expectArray));
     }
-
+    /**
+     * Check turning array with odd elements.
+     */
     @Test
     public void whenTurnArrayWithOddAmountOfElementsThenTurnedArray() {
         Turn example = new Turn();

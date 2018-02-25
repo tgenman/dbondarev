@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class PaintTest {
+    /**
+     * Check case 1.
+     */
     @Test
     public void whenPiramidWithHeightTwoThenStringWithTwoRows() {
         Paint paint = new Paint();
@@ -21,6 +24,9 @@ public class PaintTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Check case 2.
+     */
     @Test
     public void whenPiramidWithHeightThreeThenStringWithThreeRows() {
         Paint paint = new Paint();

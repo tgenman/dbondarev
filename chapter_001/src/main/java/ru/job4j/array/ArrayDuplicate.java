@@ -9,7 +9,11 @@ import java.util.Arrays;
  * @since 0.1
  */
 public class ArrayDuplicate {
-
+    /**
+     * Remove Duplicate.
+     * @param array of String[]
+     * @return array of String[]
+     */
     public String[] remove(String[] array) {
         int correctionLength = array.length;
         for (int out = 0; out < correctionLength; out++) {

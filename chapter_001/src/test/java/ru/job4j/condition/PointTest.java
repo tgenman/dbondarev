@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class PointTest {
+    /**
+     * Check when point on line.
+     */
     @Test
     public void whenPointOnLineThenTrue() {
         Point a = new Point(1, 1);
@@ -19,6 +22,9 @@ public class PointTest {
         assertThat(rsl, is(true));
     }
 
+    /**
+     * Check when point not on line.
+     */
     @Test
     public void whenPointNotOnLineThenFalse() {
         Point a = new Point(1, 2);

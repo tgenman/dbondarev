@@ -5,6 +5,11 @@ package ru.job4j.loop;
  * @since 0.1
  */
 public class Paint {
+    /**
+     * Paint piramid height of n.
+     * @param h int
+     * @return String
+     */
     public String piramid(int h) {
         StringBuilder builder = new StringBuilder();
         final String line = System.getProperty("line.separator");

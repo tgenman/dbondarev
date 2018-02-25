@@ -7,12 +7,17 @@ package ru.job4j.array;
  */
 public class RotateArray {
 
+    /**
+     * Rotate Array to 90 degrees.
+     * @param array int[][]
+     * @return int[][] array
+     */
     public int[][] rotate(int[][] array) {
         int x = array[0].length;
         int y = array.length;
         int[][] result = new int[y][x];
-        for (int i = 0; i <= y - 1 ; i++) {
-            for (int j = 0; j <= x - 1 ; j++) {
+        for (int i = 0; i <= y - 1; i++) {
+            for (int j = 0; j <= x - 1; j++) {
                 result[j][array[i].length - i - 1] = array[i][j];
             }
         }

@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class CounterTest {
+    /**
+     * Check counter from 0 to 10.
+     */
     @Test
     public void addFromZeroToTen() {
         Counter example = new Counter();
@@ -19,6 +22,9 @@ public class CounterTest {
         assertThat(rsl, is(30));
     }
 
+    /**
+     * Check counter from -10 to 10.
+     */
     @Test
     public void addFromMinusTenToTen() {
         Counter example = new Counter();

@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class ArrayDuplicateTest {
+    /**
+     * Check remove duplicate.
+     */
     @Test
     public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
         ArrayDuplicate example = new ArrayDuplicate();

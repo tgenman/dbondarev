@@ -8,6 +8,9 @@ import static org.junit.Assert.assertThat;
  * Created by tgenman on 9/3/17.
  */
 public class CalculatorTest {
+    /**
+     * Check 1 + 1 = 2.
+     */
     @Test
     public void whenAddOnePlusOneThenTwo() {
         Calculator calc = new Calculator();
@@ -17,15 +20,21 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Check 2 - 1 = 1.
+     */
     @Test
     public void whenSubstractTwoMinusOneThenOne() {
         Calculator calc = new Calculator();
-        calc.substract(2D, 1D);
+        calc.subtract(2D, 1D);
         double result = calc.getResult();
         double expected = 1D;
         assertThat(result, is(expected));
     }
 
+    /**
+     * Check 6 / 2 = 3.
+     */
     @Test
     public void whenDivSixToTwoThenThree() {
         Calculator calc = new Calculator();
@@ -35,6 +44,9 @@ public class CalculatorTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Check 2 * 2 = 4.
+     */
     @Test
     public void whenMultipleTwoAndTwoThenFour() {
         Calculator calc = new Calculator();

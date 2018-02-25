@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class BubbleSortTest {
+    /**
+     * Check sorting array with ten elements.
+     */
     @Test
     public void whenSortArrayWithTenElementsThenSortedArray() {
         BubbleSort example = new BubbleSort();

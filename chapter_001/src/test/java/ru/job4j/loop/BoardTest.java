@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class BoardTest {
+    /**
+     * Check case 1.
+     */
     @Test
     public void whenPaintBoardWithWidthThreeAndHeightThreeThenStringWithThreeColsAndThreeRows() {
         Board board = new Board();
@@ -20,7 +23,9 @@ public class BoardTest {
         String expected = String.format("x x%s x %sx x%s", line, line, line);
         assertThat(result, is(expected));
     }
-
+    /**
+     * Check case 2.
+     */
     @Test
     public void whenPaintBoardWithWidthFiveAndHeightFourThenStringWithFiveColsAndFourRows() {
         Board board = new Board();

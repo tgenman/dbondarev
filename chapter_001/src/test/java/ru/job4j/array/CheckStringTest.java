@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  */
 
 public class CheckStringTest {
+    /**
+     * Check String contain substring.
+     */
     @Test
     public void stringContainSubstring() {
         CheckString example = new CheckString();
@@ -20,6 +23,9 @@ public class CheckStringTest {
         assertThat(out, is(expect));
     }
 
+    /**
+     * Check String not contain substring.
+     */
     @Test
     public void stringNotContainSubstring() {
         CheckString example = new CheckString();

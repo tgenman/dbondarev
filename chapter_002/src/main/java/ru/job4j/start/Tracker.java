@@ -16,7 +16,6 @@ public class Tracker {
     private int position = 0;
     private static final Random RN = new Random();
 
-
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items[position++] = item;

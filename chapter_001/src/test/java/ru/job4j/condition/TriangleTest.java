@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  * @since 0.1
  */
 public class TriangleTest {
+    /**
+     * Check area of triangle by three points.
+     */
     @Test
     public void whenAreaSetThreePointsThenTriangleArea() {
         Point a = new Point(0, 0);
@@ -23,6 +26,9 @@ public class TriangleTest {
         assertThat(result, closeTo(expected, 0.1));
     }
 
+    /**
+     * Check when triangle not exist.
+     */
     @Test
     public void whenTriangleNotExist() {
         Point a = new Point(0, 0);

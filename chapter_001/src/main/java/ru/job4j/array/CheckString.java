@@ -6,7 +6,12 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class CheckString {
-
+    /**
+     * Check String to containing substring.
+     * @param origin String
+     * @param sub String
+     * @return boolean
+     */
     public boolean contains(String origin, String sub) {
         char[] in = origin.toCharArray();
         char[] piece = sub.toCharArray();

@@ -5,7 +5,12 @@ package ru.job4j.loop;
  * @since 0.1
  */
 public class Board {
-
+    /**
+     * Paint board.
+     * @param width int
+     * @param height int
+     * @return String
+     */
     public String paint(int width, int height) {
         StringBuilder builder = new StringBuilder();
         final String line = System.getProperty("line.separator");
