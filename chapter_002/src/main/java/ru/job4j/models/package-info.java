@@ -1,10 +1,8 @@
 /**
- * Package for tracker task.
- * MVC structure.
+ * Package for Model's classes.
  *
  * @author Dmitry Bondarev (mailto:tgenman@gmail.com)
  * @version $Id$
  * @since 0.1
  */
-
-package ru.job4j;
+package ru.job4j.models;

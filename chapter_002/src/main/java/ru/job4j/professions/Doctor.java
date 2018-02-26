@@ -6,14 +6,22 @@ package ru.job4j.professions;
  * @since 0.1
  */
 public class Doctor extends Profession {
-
-    public Diagnose heal(Pacient pacient) {
-        System.out.println("Доктор " + this.getName() + " лечит " + pacient.getName());
+    /**
+     * Heal of Patient.
+     * @param patient Patient
+     * @return Diagnose
+     */
+    public Diagnose heal(Patient patient) {
+        System.out.println("Доктор " + this.getName() + " лечит " + patient.getName());
         return new Diagnose();
     }
 
-    public void euthanasia(Pacient pacient) {
-        System.out.println("Доктор " + this.getName() + " применил эвтаназию к " + pacient.getName());
+    /**
+     * Euthanasia of Patient.
+     * @param patient Patient
+     */
+    public void euthanasia(Patient patient) {
+        System.out.println("Доктор " + this.getName() + " применил эвтаназию к " + patient.getName());
     }
 
 

@@ -6,8 +6,13 @@ package ru.job4j.professions;
  * @since 0.1
  */
 public class Student {
+    /** Name of student. */
     private String name;
 
+    /**
+     * Getter to Name of Student.
+     * @return String
+     */
     public String getName() {
         return name;
     }

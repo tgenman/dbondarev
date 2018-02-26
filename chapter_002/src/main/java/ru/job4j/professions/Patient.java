@@ -1,15 +1,14 @@
 package ru.job4j.professions;
 
 /**
- * Building class.
- * @author tgenman
+ * Class Patient.
  */
-public class Building {
-    /** Name of building. */
+public class Patient {
+    /** Name of Patient. */
     private String name;
 
     /**
-     * Getter to Name.
+     * Getter to name of Patient.
      * @return String
      */
     public String getName() {
