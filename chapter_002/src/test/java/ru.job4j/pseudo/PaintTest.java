@@ -13,18 +13,24 @@ import static org.junit.Assert.assertThat;
  * Created by tgenman on 3/1/18.
  */
 public class PaintTest {
-	/** Default stdout */
+	/** Default stdout. */
 	private final PrintStream stdout = System.out;
-	/** Test stdout */
+	/** Test stdout. */
 	private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-	/** Choose line separator */
-	final String line = System.getProperty("line.separator");
+	/** Choose line separator. */
+	private final String line = System.getProperty("line.separator");
 
+	/**
+	 * Change stdout.
+	 */
 	@Before
 	public void loadOutput() {
 		System.setOut(new PrintStream(this.out));
 	}
 
+	/**
+	 * Return stdout.
+	 */
 	@After
 	public void backOutput() {
 		System.setOut(this.stdout);
