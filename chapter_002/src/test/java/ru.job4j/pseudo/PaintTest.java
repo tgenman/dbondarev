@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
  */
 public class PaintTest {
 	/**
-	 * Test to paint.
+	 * Test to paint square.
 	 */
 	@Test
 	public void whenDrawSquare() {
@@ -27,6 +27,30 @@ public class PaintTest {
 								.append("++++").append(line)
 								.append("+  +").append(line)
 								.append("+  +").append(line)
+								.append("++++").append(line).append(line)
+								.toString()
+				)
+		);
+		System.setOut(stdout);
+	}
+
+	/**
+	 * Test to paint triangle.
+	 */
+	@Test
+	public void whenDrawTriangle() {
+		final String line = System.getProperty("line.separator");
+		PrintStream stdout = System.out;
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(out));
+		new Paint().draw(new Triangle());
+		assertThat(
+				new String(out.toByteArray()),
+				is(
+						new StringBuilder()
+								.append("+   ").append(line)
+								.append("++  ").append(line)
+								.append("+ + ").append(line)
 								.append("++++").append(line).append(line)
 								.toString()
 				)
