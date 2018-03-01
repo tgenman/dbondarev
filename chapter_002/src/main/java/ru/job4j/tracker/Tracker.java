@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import ru.job4j.models.Item;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -30,11 +29,13 @@ public class Tracker {
 
     /**
      * Replace item in Tracker by item's id.
-     * @param item Item
+     * @param id String id of old Item
+     * @param item new Item
      */
-    public void replace(Item item) {
+    public void replace(String id, Item item) {
         for (int index = 0; index < this.position; index++) {
-            if (this.items[index].getId().equals(item.getId())) {
+            if (this.items[index].getId().equals(id)) {
+                item.setId(this.generateId());
                 this.items[index] = item;
             }
         }
@@ -46,15 +47,12 @@ public class Tracker {
      * @param id items's id
      */
     public void delete(String id) {
-//        Item[] buffer = new Item[100];
         for (int index = 0; index < position; index++) {
             if (this.items[index].getId().equals(id)) {
                 System.arraycopy(this.items, (index + 1), this.items, index, (this.position - index - 1));
                 this.position--;
-//                items = buffer;
                 break;
             }
-//            buffer[index] = items[index];
         }
     }
 
@@ -84,12 +82,12 @@ public class Tracker {
 
     /**
      * Find item by Id.
-     * @param id String of id
+     * @param key String of id
      * @return Item with this id
      */
-    public Item findById(String id) {
+    public Item findById(String key) {
         for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+            if (item != null && item.getId().equals(key)) {
                 return item;
             }
         }

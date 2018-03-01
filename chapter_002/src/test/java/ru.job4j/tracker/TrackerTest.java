@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-import ru.job4j.models.Item;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -31,11 +30,14 @@ public class TrackerTest {
     public void whenRepalceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L);
+        previous.print();
         tracker.add(previous);
+		previous.print();
         Item next = new Item("test2", "testDescription2", 1234L);
-        next.setId(previous.getId());
-        tracker.replace(next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        next.print();
+        tracker.replace(previous.getId(), next);
+        next.print();
+        assertThat(tracker.findById(next.getId()).getName(), is("test2"));
     }
 
     /**

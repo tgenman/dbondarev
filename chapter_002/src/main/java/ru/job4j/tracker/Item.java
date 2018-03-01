@@ -1,4 +1,4 @@
-package ru.job4j.models;
+package ru.job4j.tracker;
 
 /**
  * class Item.
@@ -21,6 +21,15 @@ public class Item {
 
     /** Default constructor. */
     public Item() {
+    }
+
+    /** Constructor by name and description.
+     * @param name String
+     * @param description String
+     */
+    public Item(String name, String description) {
+        this.name = name;
+        this.desc = description;
     }
 
     /** Constructor by name, description and time to create.
@@ -108,5 +117,13 @@ public class Item {
      */
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    /**
+     * Print Item.
+     */
+    public void print() {
+        System.out.println("Name: " + this.getName() + " Description: " + this.getDesc()
+                + " id: " + this.getId());
     }
 }
