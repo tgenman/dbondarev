@@ -86,12 +86,13 @@ public class Tracker {
      * @return Item with this id
      */
     public Item findById(String key) {
+        Item result = null;
         for (Item item : this.items) {
             if (item != null && item.getId().equals(key)) {
-                return item;
+                result = item;
             }
         }
-        return null;
+        return result;
     }
 
     /**
