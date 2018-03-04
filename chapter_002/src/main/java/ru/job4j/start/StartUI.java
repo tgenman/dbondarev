@@ -1,7 +1,6 @@
 package ru.job4j.start;
 
-
-import ru.job4j.tracker.Item;
+import ru.job4j.tracker.MenuTracker;
 import ru.job4j.tracker.Tracker;
 
 /**
@@ -44,120 +43,34 @@ public class StartUI {
      */
     public void init() {
         boolean exit = false;
+		MenuTracker menu = new MenuTracker(this.input, this.tracker);
+		menu.fillActions();
         while (!exit) {
-            this.showMenu();
+            menu.showMenu();
             String answer = this.input.ask("Введите пункт меню: ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (SHOWALL.equals(answer)) {
-                this.showAllItems();
-            } else if (EDIT.equals(answer)) {
-                this.editItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (FINDITEMBYID.equals(answer)) {
-                this.findItemByID();
-            } else if (FINDITEMBYNAME.equals(answer)) {
-                this.findItemByName();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-            }
+            exit = this.checkUserInput(answer, menu);
         }
     }
 
 	/**
-	 * Print all Menu for User.
+	 * Chech User's input and execute Action of Menu.
+	 * @param answer user's input
+	 * @param menu instance of MenuTracker to exeucte actions
+	 * @return boolean to repeat loop of program
 	 */
-	private void showMenu() {
-		System.out.println("Меню");
-		System.out.println("0. Add new item");
-		System.out.println("1. Show all items");
-		System.out.println("2. Edit item");
-		System.out.println("3. Delete item");
-		System.out.println("4. Find item by id");
-		System.out.println("5. Find items by name");
-		System.out.println("6. Exit program");
-	}
-
-	/**
-	 * Create Item (Point of Menu).
-	 */
-    public void createItem() {
-        System.out.println("---------- Добавление новой заявки ---------");
-        String name = this.input.ask("Введите имя заявки: ");
-        String desc = this.input.ask("Введите описание заявки: ");
-        Item item = new Item(name, desc);
-        this.tracker.add(item);
-        System.out.println("---------- Новая заявка с id: " + item.getId() + " ---------");
-    }
-
-	/**
-	 * Print All Items (Point of Menu).
-	 */
-	private void showAllItems() {
-		System.out.println("---------- Добавление заявки: ---------");
-		Item[] items = this.tracker.findAll();
-		for (Item item : items) {
-			item.print();
-		}
-	}
-
-	/**
-	 * Edit item by id (Point of Menu).
-	 */
-	private void editItem() {
-		System.out.println("---------- Редактирование заявки ---------");
-		String inputId = this.input.ask("Введите id заявки: ");
-		Item oldItem = this.tracker.findById(inputId);
-		if (oldItem == null) {
-			System.out.println("Заявка с таким id не найдена");
-			return;
-		}
-		String name = this.input.ask("Введите имя заявки: ");
-		String desc = this.input.ask("Введите описание заявки: ");
-		Item newItem = new Item(name, desc);
-		this.tracker.replace(inputId, newItem);
-	}
-
-	/**
-	 * Delete item by id (Point of Menu).
-	 */
-	private void deleteItem() {
-		System.out.println("---------- Удаление заявки ---------");
-		String inputId = this.input.ask("Введите id заявки: ");
-		this.tracker.delete(inputId);
-	}
-
-	/**
-	 * Find item by id (Point of Menu).
-	 */
-	private void findItemByID() {
-		System.out.println("---------- Поиск заявки по id ---------");
-		String inputId = this.input.ask("Введите id заявки: ");
-		Item item = null;
-		item = this.tracker.findById(inputId);
-		if (item != null) {
-			item.print();
-		} else {
-			System.out.println("Заявки с таким id не существует");
-		}
-	}
-
-	/**
-	 * Find item by id (Point of Menu).
-	 */
-	private void findItemByName() {
-		System.out.println("---------- Поиск заявки по имени ---------");
-		String inputName = this.input.ask("Введите имя заявки: ");
-		Item[] items = null;
-		items = this.tracker.findByName(inputName);
-		if (items != null) {
-			for (Item item : items) {
-				item.print();
+    public boolean checkUserInput(String answer, MenuTracker menu) {
+    	String[] flagsOfMenu = new String[] {ADD, SHOWALL, EDIT, DELETE, FINDITEMBYID, FINDITEMBYNAME};
+    	boolean result = false;
+    	for (int index = 0; index < 6; index++) {
+			if (answer.equals(flagsOfMenu[index])) {
+				menu.select(Integer.parseInt(flagsOfMenu[index]));
+				result = false;
 			}
-		} else {
-			System.out.println("Заявок с таким именем не существует");
 		}
+		if (answer.equals(EXIT)) {
+			result = true;
+		}
+		return result;
 	}
 
     /**
