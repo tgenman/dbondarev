@@ -1,5 +1,7 @@
 package ru.job4j.start;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
@@ -37,6 +39,7 @@ public class StartUITest {
 	/**
 	 * Change stdout.
 	 */
+	@Before
 	public void loadOutput() {
 		System.setOut(new PrintStream(this.out));
 	}
@@ -44,6 +47,7 @@ public class StartUITest {
 	/**
 	 * Return stdout.
 	 */
+	@After
 	public void backOutput() {
 		System.setOut(this.stdout);
 	}
@@ -64,7 +68,6 @@ public class StartUITest {
 	 */
 	@Test
 	public void whenUserShowAllItems() {
-		this.loadOutput();
 		Tracker tracker = new Tracker();
 		Item item = new Item("test name", "desc");
 		tracker.add(item);
@@ -78,7 +81,6 @@ public class StartUITest {
 								.append(menu)
 								.toString()
 				));
-		this.backOutput();
 	}
 
 	/**
@@ -111,7 +113,6 @@ public class StartUITest {
 	 */
 	@Test
 	public void whenUserFindItemById() {
-		this.loadOutput();
 		Tracker tracker = new Tracker();
 		Item item = new Item("test name", "desc");
 		tracker.add(item);
@@ -125,7 +126,6 @@ public class StartUITest {
 						.append(menu)
 						.toString()
 		));
-		this.backOutput();
 	}
 
 	/**
@@ -133,7 +133,6 @@ public class StartUITest {
 	 */
 	@Test
 	public void whenUserFindItemByName() {
-		this.loadOutput();
 		Tracker tracker = new Tracker();
 		Item item = new Item("test name", "desc");
 		tracker.add(item);
@@ -147,6 +146,5 @@ public class StartUITest {
 						.append(menu)
 						.toString()
 		));
-		this.backOutput();
 	}
 }
