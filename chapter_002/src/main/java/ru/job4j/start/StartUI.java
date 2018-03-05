@@ -8,20 +8,22 @@ import ru.job4j.tracker.Tracker;
  * @author tgenman
  */
 public class StartUI {
-    /** Constanta for menu to add new Item. */
-    private static final String ADD = "0";
-    /** Constanta for menu to show all items. */
-    private static final String SHOWALL = "1";
-    /** Constanta for menu to edit Item. */
-    private static final String EDIT = "2";
-    /** Constanta for menu to delete Item. */
-    private static final String DELETE = "3";
-    /** Constanta for menu to find Item by Id. */
-    private static final String FINDITEMBYID = "4";
-    /** Constanta for menu to find item by name. */
-    private static final String FINDITEMBYNAME = "5";
-    /** Constanta for menu to exit. */
-    private static final String EXIT = "6";
+	/** Container to range */
+	private int[] range = new int[] {ADD, SHOWALL, EDIT, DELETE, FINDITEMBYID, FINDITEMBYNAME, EXIT};
+    /** Constainer for menu to add new Item. */
+    private static final int ADD = 0;
+    /** Container for menu to show all items. */
+    private static final int SHOWALL = 1;
+    /** Constainer for menu to edit Item. */
+    private static final int EDIT = 2;
+    /** Constainer for menu to delete Item. */
+    private static final int DELETE = 3;
+    /** Constainer for menu to find Item by Id. */
+    private static final int FINDITEMBYID = 4;
+    /** Constainer for menu to find item by name. */
+    private static final int FINDITEMBYNAME = 5;
+    /** Constainer for menu to exit. */
+    private static final int EXIT = 6;
 
     /** Realisation of input. */
     private final Input input;
@@ -47,7 +49,7 @@ public class StartUI {
 		menu.fillActions();
         while (!exit) {
             menu.showMenu();
-            String answer = this.input.ask("Введите пункт меню: ");
+            int answer = this.input.ask("Введите пункт меню: ", this.range);
             exit = this.checkUserInput(answer, menu);
         }
     }
@@ -58,17 +60,17 @@ public class StartUI {
 	 * @param menu instance of MenuTracker to exeucte actions
 	 * @return boolean to repeat loop of program
 	 */
-    public boolean checkUserInput(String answer, MenuTracker menu) {
-    	String[] flagsOfMenu = new String[] {ADD, SHOWALL, EDIT, DELETE, FINDITEMBYID, FINDITEMBYNAME};
+    public boolean checkUserInput(int answer, MenuTracker menu) {
+    	int[] flagsOfMenu = new int[] {ADD, SHOWALL, EDIT, DELETE, FINDITEMBYID, FINDITEMBYNAME};
     	boolean result = false;
-    	for (int index = 0; index < 6; index++) {
-			if (answer.equals(flagsOfMenu[index])) {
-				menu.select(Integer.parseInt(flagsOfMenu[index]));
+		if (answer == EXIT) {
+			result = true;
+		}
+		for (int index = 0; index < (this.range.length - 1); index++) {
+			if (answer == flagsOfMenu[index]) {
+				menu.select(flagsOfMenu[index]);
 				result = false;
 			}
-		}
-		if (answer.equals(EXIT)) {
-			result = true;
 		}
 		return result;
 	}
@@ -78,6 +80,6 @@ public class StartUI {
      * @param args nothing
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

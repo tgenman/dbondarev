@@ -76,7 +76,7 @@ public class StartUITest {
 		assertThat(new String(out.toByteArray()), is(
 						new StringBuilder()
 								.append(menu)
-								.append("---------- Добавление заявки: ---------").append(line)
+								.append("---------- Показать все заявки: ---------").append(line)
 								.append("Name: test name Description: desc id: ").append(item.getId()).append(line)
 								.append(menu)
 								.toString()

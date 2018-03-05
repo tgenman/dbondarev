@@ -14,7 +14,7 @@ public class MenuTracker {
 	private Tracker tracker;
 
 	/** Container to Actions. */
-	private UserAction[] actions = new UserAction[6];
+	private UserAction[] actions = new UserAction[7];
 
 	/**
 	 * Constructor.
@@ -34,6 +34,7 @@ public class MenuTracker {
 		this.actions[3] = this.new DeleteItem();
 		this.actions[4] = this.new FindItemById();
 		this.actions[5] = this.new FindItemBYName();
+		this.actions[6] = this.new Exit();
 	}
 
 	/**
@@ -50,7 +51,6 @@ public class MenuTracker {
 		for (UserAction action : this.actions) {
 			System.out.println(action.info());
 		}
-		System.out.println("6. Exit program");
 	}
 
 	/** Action 0: Add Item. */
@@ -85,7 +85,7 @@ public class MenuTracker {
 
 		@Override
 		public void execute(Input input, Tracker tracker) {
-			System.out.println("---------- Добавление заявки: ---------");
+			System.out.println("---------- Показать все заявки: ---------");
 			for (Item item : tracker.findAll()) {
 				item.print();
 			}
@@ -171,6 +171,22 @@ public class MenuTracker {
 		@Override
 		public String info() {
 			return String.format("%s. %s", this.key(), "Find items by name");
+		}
+	}
+
+	/** Action 6: Exit. */
+	private class Exit implements UserAction {
+		@Override
+		public int key() {
+			return 6;
+		}
+
+		@Override
+		public void execute(Input input, Tracker tracker) { }
+
+		@Override
+		public String info() {
+			return String.format("%s. %s", this.key(), "Exit program");
 		}
 	}
 }
