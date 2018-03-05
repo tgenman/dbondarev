@@ -8,7 +8,7 @@ import ru.job4j.tracker.Tracker;
  * @author tgenman
  */
 public class StartUI {
-	/** Container to range */
+	/** Container to range. */
 	private int[] range = new int[] {ADD, SHOWALL, EDIT, DELETE, FINDITEMBYID, FINDITEMBYNAME, EXIT};
     /** Constainer for menu to add new Item. */
     private static final int ADD = 0;
@@ -80,6 +80,9 @@ public class StartUI {
      * @param args nothing
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(
+        		new ValidateInput(
+        				new ConsoleInput()),
+				new Tracker()).init();
     }
 }
