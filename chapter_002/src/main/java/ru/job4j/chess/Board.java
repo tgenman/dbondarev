@@ -9,7 +9,7 @@ import ru.job4j.chess.exceptions.OccupiedWayException;
  */
 public class Board {
 	/** Array to figures. */
-	Figure[] figures = new Figure[32];
+	private Figure[] figures = new Figure[32];
 
 	/** Pointer to Array. */
 	private int position = 0;
@@ -83,12 +83,22 @@ public class Board {
 	 * @param indexFigure index of Figure to array of figures
 	 */
 	private void checkRoute(Cell[] route, int indexFigure) {
-		if (figures[indexFigure].isItKnight == false) {
-			for (int index = 1; index < route.length; index++) {
-				if (this.checkCellHasOneOfFigures(route[index])) {
-					throw new OccupiedWayException("Путь фигуры занят");
-				}
+		if (figures[indexFigure].isItKnight()) {
+			return;
+		}
+ 		for (int index = 1; index < route.length; index++) {
+			if (this.checkCellHasOneOfFigures(route[index])) {
+				throw new OccupiedWayException("Путь фигуры занят");
 			}
 		}
+	}
+
+	/**
+	 * Getter to figures to test.
+	 * @param index of array
+	 * @return Figure witn this index
+	 */
+	public Figure getFigure(int index) {
+		return this.figures[index];
 	}
 }

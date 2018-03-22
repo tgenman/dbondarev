@@ -6,7 +6,10 @@ import ru.job4j.chess.exceptions.ImposibleMoveException;
  * Created by tgenman on 3/9/18.
  */
 public class Bishop extends Figure {
-
+	/**
+	 * Constructor.
+	 * @param position Cell of Bishop.
+	 */
 	Bishop(Cell position) {
 		super(position);
 	}
@@ -22,6 +25,12 @@ public class Bishop extends Figure {
 		return new Bishop(dest);
 	}
 
+	/**
+	 * Check Route.
+	 * @param source Cell of start
+	 * @param dest Cell of finish
+	 * @throws ImposibleMoveException if route is not acceptable.
+	 */
 	private void checkRouteToAccepteble(Cell source, Cell dest) throws ImposibleMoveException {
 		int x1 = source.getX();
 		int y1 = source.getY();
@@ -34,6 +43,12 @@ public class Bishop extends Figure {
 		}
 	}
 
+	/**
+	 * Generate array of route's Cells.
+	 * @param source Cell of start
+	 * @param dest Cell of finish
+	 * @return array of route's Cells
+	 */
 	private Cell[] generateRouteCells(Cell source, Cell dest) {
 		int x1 = source.getX();
 		int y1 = source.getY();

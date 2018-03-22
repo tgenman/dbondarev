@@ -10,7 +10,9 @@ import static org.junit.Assert.assertThat;
  * Created by tgenman on 3/9/18.
  */
 public class BishopTest {
-
+	/**
+	 * Test when route is right 1.
+	 */
 	@Test
 	public void whenWayRightFirstQuadrantThenReturnRoute() {
 		Cell source = new Cell(2, 2);
@@ -27,6 +29,9 @@ public class BishopTest {
 		assertThat(route[2].getY(), is(dest.getY()));
 	}
 
+	/**
+	 * Test when route is right 2.
+	 */
 	@Test
 	public void whenWayRightSecondQuadrantThenReturnRoute() {
 		Cell source = new Cell(2, 2);
@@ -43,6 +48,9 @@ public class BishopTest {
 		assertThat(route[2].getY(), is(dest.getY()));
 	}
 
+	/**
+	 * Test when route is right 3.
+	 */
 	@Test
 	public void whenWayRightThirdQuadrantThenReturnRoute() {
 		Cell source = new Cell(2, 2);
@@ -59,6 +67,9 @@ public class BishopTest {
 		assertThat(route[2].getY(), is(dest.getY()));
 	}
 
+	/**
+	 * Test when route is right 4.
+	 */
 	@Test
 	public void whenWayRightFourthQuadrantThenReturnRoute() {
 		Cell source = new Cell(2, 2);
@@ -74,7 +85,9 @@ public class BishopTest {
 		assertThat(route[2].getX(), is(dest.getX()));
 		assertThat(route[2].getY(), is(dest.getY()));
 	}
-
+	/**
+	 * Test when route is wrong.
+	 */
 	@Test
 	public void whenWayWrongThenGenerateException() {
 		Cell source = new Cell(2, 2);
