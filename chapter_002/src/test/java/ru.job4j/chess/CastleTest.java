@@ -6,18 +6,18 @@ import ru.job4j.chess.exceptions.ImposibleMoveException;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
- * Created by tgenman on 3/9/18.
+ * Created by tgenman on 3/23/18.
  */
-public class BishopTest {
+public class CastleTest {
 	/**
 	 * Test when route is right 1.
 	 */
 	@Test
-	public void whenWayRightFirstQuadrantThenReturnRoute() {
+	public void whenWayRightToUpperThenReturnRoute() {
 		Cell source = new Cell(2, 2);
-		Cell point1 = new Cell(3, 3);
-		Cell dest = new Cell(4, 4);
-		Figure one = new Bishop(source);
+		Cell point1 = new Cell(2, 3);
+		Cell dest = new Cell(2, 4);
+		Figure one = new Castle(source);
 		Cell[] route = one.way(source, dest);
 		assertThat(route.length, is(3));
 		assertThat(route[0].getX(), is(source.getX()));
@@ -32,11 +32,11 @@ public class BishopTest {
 	 * Test when route is right 2.
 	 */
 	@Test
-	public void whenWayRightSecondQuadrantThenReturnRoute() {
+	public void whenWayRightToDownThenReturnRoute() {
 		Cell source = new Cell(2, 2);
-		Cell point1 = new Cell(1, 3);
-		Cell dest = new Cell(0, 4);
-		Figure one = new Bishop(source);
+		Cell point1 = new Cell(2, 1);
+		Cell dest = new Cell(2, 0);
+		Figure one = new Castle(source);
 		Cell[] route = one.way(source, dest);
 		assertThat(route.length, is(3));
 		assertThat(route[0].getX(), is(source.getX()));
@@ -51,11 +51,11 @@ public class BishopTest {
 	 * Test when route is right 3.
 	 */
 	@Test
-	public void whenWayRightThirdQuadrantThenReturnRoute() {
+	public void whenWayRightToLeftThenReturnRoute() {
 		Cell source = new Cell(2, 2);
-		Cell point1 = new Cell(1, 1);
-		Cell dest = new Cell(0, 0);
-		Figure one = new Bishop(source);
+		Cell point1 = new Cell(1, 2);
+		Cell dest = new Cell(0, 2);
+		Figure one = new Castle(source);
 		Cell[] route = one.way(source, dest);
 		assertThat(route.length, is(3));
 		assertThat(route[0].getX(), is(source.getX()));
@@ -70,11 +70,11 @@ public class BishopTest {
 	 * Test when route is right 4.
 	 */
 	@Test
-	public void whenWayRightFourthQuadrantThenReturnRoute() {
+	public void whenWayRightToRightThenReturnRoute() {
 		Cell source = new Cell(2, 2);
-		Cell point1 = new Cell(3, 1);
-		Cell dest = new Cell(4, 0);
-		Figure one = new Bishop(source);
+		Cell point1 = new Cell(3, 2);
+		Cell dest = new Cell(4, 2);
+		Figure one = new Castle(source);
 		Cell[] route = one.way(source, dest);
 		assertThat(route.length, is(3));
 		assertThat(route[0].getX(), is(source.getX()));
@@ -92,7 +92,7 @@ public class BishopTest {
 	public void whenWayWrongThenGenerateException() {
 		Cell source = new Cell(2, 2);
 		Cell dest = new Cell(4, 1);
-		Figure one = new Bishop(source);
+		Figure one = new Castle(source);
 		String result = "Фигура не может ходить так";
 		String answer = "";
 		try {
