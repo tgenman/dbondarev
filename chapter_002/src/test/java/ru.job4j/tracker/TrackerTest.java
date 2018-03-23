@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,7 +23,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     /**
@@ -49,7 +52,7 @@ public class TrackerTest {
         tracker.add(new Item("test1", "testDescription1", 123L));
         tracker.add(new Item("test2", "testDescription2", 123L));
         tracker.add(new Item("test3", "testDescription3", 123L));
-        String keyId = tracker.findAll()[1].getId();
+        String keyId = tracker.findAll().get(1).getId();
         assertThat(tracker.findById(keyId).getId(), is(keyId));
     }
 
@@ -97,12 +100,12 @@ public class TrackerTest {
         Item two = new Item("test2", "testDescription2", 123L);
         tracker.add(one);
         tracker.add(two);
-        Item[] expectArray = new Item[2];
-        expectArray[0] = one;
-        expectArray[1] = two;
-        Item[] resultArray = tracker.findAll();
+        List<Item> expectArray = new ArrayList<>();
+        expectArray.add(one);
+        expectArray.add(two);
+        List<Item> resultArray = tracker.findAll();
         for (int i = 0; i < 2; i++) {
-            assertThat(resultArray[i], is(expectArray[i]));
+            assertThat(resultArray.get(i), is(expectArray.get(i)));
         }
     }
 }
