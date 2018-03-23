@@ -61,4 +61,26 @@ public class ConvertListTest {
 		assertThat(output[2][2], is(0));
 		assertThat(output[2][3], is(0));
 	}
+
+	/**
+	 * Test convert().
+	 */
+	@Test
+	public void whenConvertThenReturnRightList() {
+		ConvertList convertList = new ConvertList();
+		List<int[]> list = new ArrayList<>();
+		list.add(new int[]{1, 2});
+		list.add(new int[]{3, 4, 5, 6});
+		list.add(new int[]{3, 4, 5});
+		List<Integer> result = convertList.convert(list);
+		assertThat(result.get(0), is(1));
+		assertThat(result.get(1), is(2));
+		assertThat(result.get(2), is(3));
+		assertThat(result.get(3), is(4));
+		assertThat(result.get(4), is(5));
+		assertThat(result.get(5), is(6));
+		assertThat(result.get(6), is(3));
+		assertThat(result.get(7), is(4));
+		assertThat(result.get(8), is(5));
+	}
 }
