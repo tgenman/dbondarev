@@ -1,6 +1,11 @@
 package ru.job4j.sort;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 /**
  * Created by tgenman on 4/3/18.
@@ -31,13 +36,18 @@ public class SortUser {
 		return this.container;
 	}
 
+	/**
+	 * sortNameLength.
+	 * @param list of Users
+	 * @return list of Users
+	 */
 	public List<User> sortNameLength(List<User> list) {
 		this.container = new TreeSet<>(
 				new Comparator<User>() {
 					@Override
 					public int compare(User o1, User o2) {
-						Integer lengthNameO1= o1.getName().length();
-						Integer lengthNameO2= o2.getName().length();
+						Integer lengthNameO1 = o1.getName().length();
+						Integer lengthNameO2 = o2.getName().length();
 						return lengthNameO1.compareTo(lengthNameO2);
 					}
 				}
@@ -50,6 +60,11 @@ public class SortUser {
 		return result;
 	}
 
+	/**
+	 * sortByAllFields.
+	 * @param list of Users
+	 * @return list of Users
+	 */
 	public List<User> sortByAllFields(List<User> list) {
 		this.container = new TreeSet<>();
 		this.container.addAll(list);

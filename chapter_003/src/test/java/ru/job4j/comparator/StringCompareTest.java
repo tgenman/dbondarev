@@ -10,9 +10,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by tgenman on 4/4/18.
  */
 public class StringCompareTest {
-
+	/**
+	 * Test 1.
+	 */
 	@Test
-	public void whenStringsAreEqualThenZero () {
+	public void whenStringsAreEqualThenZero() {
 		StringCompare compare = new StringCompare();
 		int rst = compare.compare(
 				"Ivanov",
@@ -21,8 +23,11 @@ public class StringCompareTest {
 		assertThat(rst, is(0));
 	}
 
+	/**
+	 * Test 2.
+	 */
 	@Test
-	public void whenLeftLessThanRightResultShouldBeNegative () {
+	public void whenLeftLessThanRightResultShouldBeNegative() {
 		StringCompare compare = new StringCompare();
 		int rst = compare.compare(
 				"Ivanov",
@@ -31,8 +36,11 @@ public class StringCompareTest {
 		assertThat(rst, lessThan(0));
 	}
 
+	/**
+	 * Test 3.
+	 */
 	@Test
-	public void whenLeftGreaterThanRightResultShouldBePositive () {
+	public void whenLeftGreaterThanRightResultShouldBePositive() {
 		StringCompare compare = new StringCompare();
 		int rst = compare.compare(
 				"Petrov",
@@ -41,8 +49,11 @@ public class StringCompareTest {
 		assertThat(rst, greaterThan(0));
 	}
 
+	/**
+	 * Test 4.
+	 */
 	@Test
-	public void secondCharOfLeftGreaterThanRightShouldBePositive(){
+	public void secondCharOfLeftGreaterThanRightShouldBePositive() {
 		StringCompare compare = new StringCompare();
 		int rst = compare.compare(
 				"Petrov",
@@ -51,8 +62,11 @@ public class StringCompareTest {
 		assertThat(rst, greaterThan(0));
 	}
 
+	/**
+	 * Test 5.
+	 */
 	@Test
-	public void secondCharOfLeftLessThanRightShouldBeNegative(){
+	public void secondCharOfLeftLessThanRightShouldBeNegative() {
 		StringCompare compare = new StringCompare();
 		int rst = compare.compare(
 				"Patrova",
