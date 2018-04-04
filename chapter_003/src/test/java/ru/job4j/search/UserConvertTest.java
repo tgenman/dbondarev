@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -20,9 +19,9 @@ public class UserConvertTest {
 	public void whenProcessThenReturnRightMap() {
 		UserConvert userConvert = new UserConvert();
 		List<User> users = new ArrayList<>();
-		users.add(new User(1,"Ivan", "Piter"));
-		users.add(new User(2,"Petr", "Sochi"));
-		users.add(new User(3,"Stas", "Moscow"));
+		users.add(new User(1, "Ivan",  "Piter"));
+		users.add(new User(2, "Petr",  "Sochi"));
+		users.add(new User(3, "Stas",  "Moscow"));
 		Map<Integer, User> result =  userConvert.process(users);
 		assertThat(result.containsKey(1), is(true));
 		assertThat(result.containsKey(2), is(true));
