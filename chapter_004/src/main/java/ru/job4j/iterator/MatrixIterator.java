@@ -36,7 +36,6 @@ public class MatrixIterator implements Iterator<Integer> {
 			int old = innerIndex;
 			innerIndex = 0;
 			return collection[outerIndex++][old];
-//			ArrayList
 		}
 	}
 }
