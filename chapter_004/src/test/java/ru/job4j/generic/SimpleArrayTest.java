@@ -89,4 +89,16 @@ public class SimpleArrayTest {
 		assertThat(testInstance.get(1), is(30));
 	}
 
+	/**
+	 * Test 7.
+	 */
+	@Test
+	public void testGetIndex()  {
+		final SimpleArray<Integer> testInstance = new SimpleArray<>();
+		testInstance.add(1);
+		testInstance.add(2);
+		testInstance.add(30);
+		assertThat(testInstance.getIndex(30), is(2));
+	}
+
 }

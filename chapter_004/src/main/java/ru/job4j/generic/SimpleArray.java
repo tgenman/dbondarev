@@ -80,6 +80,23 @@ public class SimpleArray<T> implements Iterable<T> {
 		return container[index];
 	}
 
+	/**
+	 * Return index of element.
+	 * @param element T
+	 * @return int
+	 */
+	public int getIndex(T element) {
+		for (int i = 0; i < size; i++) {
+			if (container[i] == null) {
+				continue;
+			}
+			if (container[i].equals(element)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	@Override
 	public Iterator<T> iterator() {
 		return new SimpleIterator();
