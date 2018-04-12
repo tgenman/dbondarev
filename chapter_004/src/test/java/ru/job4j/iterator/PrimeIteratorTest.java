@@ -10,15 +10,21 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**Test. */
 public class PrimeIteratorTest {
 
+	/**.. */
 	private Iterator<Integer> it;
 
+	/**Before. */
 	@Before
 	public void setUp() {
 		it = new PrimeIterator(new int[]{1, 2, 3, 4, 5, 6, 7, 3571});
 	}
 
+	/**
+	 * Test 1.
+	 */
 	@Test(expected = NoSuchElementException.class)
 	public void shouldReturnPrimeNumbersOnly() {
 		assertThat(it.hasNext(), is(true));
@@ -35,6 +41,9 @@ public class PrimeIteratorTest {
 		it.next();
 	}
 
+	/**
+	 * Test 2.
+	 */
 	@Test
 	public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
 		assertThat(it.hasNext(), is(true));
@@ -46,6 +55,9 @@ public class PrimeIteratorTest {
 		assertThat(it.next(), is(3571));
 	}
 
+	/**
+	 * Test 3.
+	 */
 	@Test
 	public void shouldReturnFalseCauseThereIsNoAnyPrimeNumber() {
 		it = new PrimeIterator(new int[]{4, 6});

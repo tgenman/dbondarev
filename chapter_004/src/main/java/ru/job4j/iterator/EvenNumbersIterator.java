@@ -8,11 +8,16 @@ import java.util.NoSuchElementException;
  * Created by tgenman on 4/7/18.
  */
 public class EvenNumbersIterator implements Iterator<Integer> {
-
+	/** COntainer. */
 	private int[] collection;
 
+	/** Pointer. */
 	private int nextIndex;
 
+	/**
+	 * EvenNumbersIterator.
+	 * @param ints int[]
+	 */
 	public EvenNumbersIterator(int[] ints) {
 		this.collection = ints;
 		for (int i = 0; i < collection.length; i++) {
@@ -25,7 +30,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
 	@Override
 	public boolean hasNext() {
-		if (nextIndex == -1) return false;
+		if (nextIndex == -1) {
+			return false;
+		}
 		if (collection[nextIndex] % 2 == 0) {
 			return true;
 		}
@@ -34,7 +41,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		if (!hasNext()) throw new NoSuchElementException();
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
 		int returnIndex = nextIndex;
 		for (int i = nextIndex + 1; i < collection.length; i++) {
 			if (collection[i] % 2 == 0) {
@@ -42,7 +51,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 				break;
 			}
 		}
-		if (returnIndex == nextIndex) nextIndex = -1;
+		if (returnIndex == nextIndex) {
+			nextIndex = -1;
+		}
 		return collection[returnIndex];
 	}
 }

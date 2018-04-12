@@ -9,17 +9,22 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/** Test.*/
 public class MatrixTest {
-
+	/**..*/
 	private Iterator<Integer> it;
 
+	/**Before. */
 	@Before
-	public void setUp(){
+	public void setUp() {
 		it = new MatrixIterator(new int[][]{{1, 2, 3}, {4, 5, 6}});
 	}
 
+	/**
+	 * Test 1.
+	 */
 	@Test
-	public void hasNextNextSequentialInvocation () {
+	public void hasNextNextSequentialInvocation() {
 		assertThat(it.hasNext(), is(true));
 		assertThat(it.next(), is(1));
 		assertThat(it.hasNext(), is(true));
@@ -35,8 +40,11 @@ public class MatrixTest {
 		assertThat(it.hasNext(), is(false));
 	}
 
+	/**
+	 * Test 2.
+	 */
 	@Test
-	public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation () {
+	public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
 		assertThat(it.next(), is(1));
 		assertThat(it.next(), is(2));
 		assertThat(it.next(), is(3));
@@ -45,8 +53,11 @@ public class MatrixTest {
 		assertThat(it.next(), is(6));
 	}
 
+	/**
+	 * Test 3.
+	 */
 	@Test
-	public void sequentialHasNextInvocationDoesntAffectRetrievalOrder () {
+	public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
 		assertThat(it.hasNext(), is(true));
 		assertThat(it.hasNext(), is(true));
 		assertThat(it.next(), is(1));
@@ -57,8 +68,11 @@ public class MatrixTest {
 		assertThat(it.next(), is(6));
 	}
 
+	/**
+	 * Test 4.
+	 */
 	@Test(expected = NoSuchElementException.class)
-	public void shoulThrowNoSuchElementException () {
+	public void shoulThrowNoSuchElementException() {
 		it = new MatrixIterator(new int[][]{});
 		it.next();
 	}

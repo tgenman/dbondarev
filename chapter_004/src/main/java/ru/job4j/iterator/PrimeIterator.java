@@ -9,10 +9,16 @@ import java.util.NoSuchElementException;
  */
 public class PrimeIterator implements Iterator<Integer> {
 
+	/** container. */
 	private int[] collection;
 
+	/** pointer.*/
 	private int nextIndex = -1;
 
+	/**
+	 * Iterator for primes.
+	 * @param ints int[]
+	 */
 	public PrimeIterator(int[] ints) {
 		this.collection = ints;
 
@@ -28,7 +34,9 @@ public class PrimeIterator implements Iterator<Integer> {
 
 	@Override
 	public boolean hasNext() {
-		if (nextIndex == -1) return false;
+		if (nextIndex == -1) {
+			return false;
+		}
 		if (this.isPrime(collection[nextIndex])) {
 			return true;
 		}
@@ -37,7 +45,9 @@ public class PrimeIterator implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		if (!hasNext()) throw new NoSuchElementException();
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
 		int returnIndex = nextIndex;
 		for (int i = nextIndex + 1; i < collection.length; i++) {
 			if (this.isPrime(collection[i])) {
@@ -45,12 +55,21 @@ public class PrimeIterator implements Iterator<Integer> {
 				break;
 			}
 		}
-		if (returnIndex == nextIndex) nextIndex = -1;
+		if (returnIndex == nextIndex) {
+			nextIndex = -1;
+		}
 		return collection[returnIndex];
 	}
 
+	/**
+	 * Checker fo primes.
+	 * @param number int
+	 * @return boolean
+	 */
 	private boolean isPrime(int number) {
-		if (number == 1) return false;
+		if (number == 1) {
+			return false;
+		}
 		for (int i = 2; i < number; i++) {
 			if (number % i == 0) {
 				return false;

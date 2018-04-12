@@ -8,13 +8,19 @@ import java.util.NoSuchElementException;
  * Created by tgenman on 4/7/18.
  */
 public class MatrixIterator implements Iterator<Integer> {
-
+	/** container. */
 	private int[][] collection;
 
+	/** pointer for out array. */
 	private int outerIndex;
 
+	/** pointer for inner array. */
 	private int innerIndex;
 
+	/**
+	 * Container.
+	 * @param ints int[][]
+	 */
 	public MatrixIterator(int[][] ints) {
 		this.collection = ints;
 		this.outerIndex = 0;
@@ -29,7 +35,9 @@ public class MatrixIterator implements Iterator<Integer> {
 
 	@Override
 	public Integer next() {
-		if (!hasNext()) throw new NoSuchElementException();
+		if (!hasNext()) {
+			throw new NoSuchElementException();
+		}
 		if (innerIndex < collection[outerIndex].length - 1) {
 			return collection[outerIndex][innerIndex++];
 		} else {
