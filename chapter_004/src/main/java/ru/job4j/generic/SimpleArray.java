@@ -15,6 +15,8 @@ public class SimpleArray<T> implements Iterable<T> {
 	/** Size. */
 	private int size;
 
+	private final static int COEFFICIENT_OF_INCREASE_SIZE = 2;
+
 	/**
 	 * Size.
 	 * @return size.
@@ -28,10 +30,7 @@ public class SimpleArray<T> implements Iterable<T> {
 	 * @return boolean
 	 */
 	public boolean isEmpty() {
-		if (size == 0) {
-			return true;
-		}
-		return false;
+		return size == 0;
 	}
 
 	/**
@@ -41,7 +40,7 @@ public class SimpleArray<T> implements Iterable<T> {
 	public void add(T model) {
 		if (container.length == size) {
 			final T[] oldM = container;
-			container = (T[]) new Object[this.size() * 2];
+			container = (T[]) new Object[this.size() * COEFFICIENT_OF_INCREASE_SIZE];
 			System.arraycopy(oldM, 0, container, 0, oldM.length);
 		}
 		container[size++] = model;

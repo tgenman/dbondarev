@@ -60,6 +60,24 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	}
 
 	/**
+	 * Remove.
+	 * @param o Object
+	 * @return boolean
+	 */
+	public boolean remove(final Object o) {
+		System.out.println();
+		boolean result = false;
+		ElementsIterator elementsIterator = new ElementsIterator();
+		while (elementsIterator.hasNext()) {
+			if (elementsIterator.next().equals(o)) {
+				elementsIterator.remove();
+				result = true;
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * Get by index.
 	 * @param index int
 	 * @return T
@@ -128,10 +146,49 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
+			System.out.print("NEXT BEFORE:::");
+			System.out.println("lastReturned = " + lastReturnedItem
+					+ " nextItem = " + nextItem.element.toString());
 			lastReturnedItem = nextItem;
 			nextItem = nextItem.getNextNode();
 			nextIndex++;
+			System.out.print("NEXT AFTER:::");
+//			System.out.println("lastReturned = " + lastReturnedItem.element.toString()
+//					+ " nextItem = " + nextItem.element.toString());
 			return lastReturnedItem.element;
+		}
+
+		@Override
+		public void remove() {
+			System.out.println("start remove");
+			System.out.println("last returned = " + lastReturnedItem.element.toString());
+			if (lastReturnedItem == null) {
+				throw new IllegalStateException();
+			}
+			if (lastReturnedItem.getPrevNode() == null && lastReturnedItem.getNextNode() == null) {
+				firstInList = null;
+				lastInList = null;
+			} else if (lastReturnedItem.getPrevNode() == null) {
+				System.out.println("first else");
+				firstInList = lastReturnedItem.getNextNode();
+				nextItem.prevNode = null;
+			} else if (nextItem == null) {
+				System.out.println("second else");
+				lastReturnedItem.getPrevNode().nextNode = null;
+			} else {
+				System.out.println("third else");
+				Node<T> next = nextItem;
+				Node<T> previous = lastReturnedItem.getPrevNode();
+				next.prevNode = previous;
+				previous.nextNode = next;
+			}
+			lastReturnedItem = null;
+			nextIndex--;
+			size--;
+			System.out.println("nextIndex = " + nextIndex + ". Size = " + size);
+//			System.out.println("nextItem = " + nextItem.element.toString() + ". lastReturnedItem = " + lastReturnedItem);
+			System.out.println("end remove");
+			System.out.println();
 		}
 	}
 
@@ -167,6 +224,14 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		 * @return Node<T>
 		 */
 		public Node<T> getNextNode() {
+			return nextNode;
+		}
+
+		/**
+		 * Getter to Previous Node.
+		 * @return Node<T>
+		 */
+		public Node<T> getPrevNode() {
 			return nextNode;
 		}
 	}
