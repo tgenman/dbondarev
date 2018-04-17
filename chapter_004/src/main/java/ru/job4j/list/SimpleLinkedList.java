@@ -60,21 +60,17 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	}
 
 	/**
-	 * Remove.
-	 * @param o Object
-	 * @return boolean
+	 * Remove by index.
+	 * @param index int
+	 * @return T
+	 * @throws IndexOutOfBoundsException E
 	 */
-	public boolean remove(final Object o) {
-		System.out.println();
-		boolean result = false;
-		ElementsIterator elementsIterator = new ElementsIterator();
-		while (elementsIterator.hasNext()) {
-			if (elementsIterator.next().equals(o)) {
-				elementsIterator.remove();
-				result = true;
-			}
-		}
-		return result;
+	public T remove(final int index) throws IndexOutOfBoundsException {
+		ElementsIterator elementsIterator = new ElementsIterator(index);
+		T temp = elementsIterator.next();
+		elementsIterator.remove();
+		this.modCount++;
+		return temp;
 	}
 
 	/**
@@ -89,6 +85,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		int count = 0;
 		T result = null;
 		for (T item : this) {
+
 			if (count == index) {
 				result = item;
 				break;
@@ -104,17 +101,59 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	}
 
 	/**
+	 * Private method getItemByIndex.
+	 * @param index int
+	 * @return Node<T>
+	 */
+	private Node<T> getItemByIndex(final int index) {
+		int i = 0;
+		Node<T> current = firstInList;
+		while (i != index) {
+			current = current.nextNode;
+			i++;
+		}
+		return current;
+	}
+
+	/**
+	 * Private method to delete Node.
+	 * @param current Node<T>
+	 */
+	private void remove(final Node<T> current) {
+		if (current != null) {
+			if (this.size() == 1) {
+				this.firstInList = null;
+				this.lastInList = null;
+			} else {
+				if (current == firstInList) {
+					firstInList = current.nextNode;
+					firstInList.prevNode = null;
+				}
+				if (current == lastInList) {
+					lastInList = current.prevNode;
+					lastInList.nextNode = null;
+				}
+				if (current.nextNode != null && current.prevNode != null) {
+					current.prevNode.nextNode = current.nextNode;
+					current.nextNode.prevNode = current.prevNode;
+				}
+			}
+			size--;
+		}
+	}
+
+	/**
 	 * Iterator.
 	 */
 	private class ElementsIterator implements Iterator<T> {
 		/** Link to first Node. */
-		private Node<T> nextItem;
+		private Node<T> currentItemInIterator;
 
 		/** Link to last returned Node. */
-		private Node<T> lastReturnedItem;
+		private Node<T> lastReturnedItemFromIterator;
 
 		/** Index of next Node. */
-		private int nextIndex;
+		private int index;
 
 		/**
 		 * Value of count when create iterator.
@@ -125,20 +164,28 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		 * Constructor.
 		 */
 		private ElementsIterator() {
-			this.nextItem = firstInList;
-			this.lastReturnedItem = null;
-			this.nextIndex = 0;
+			this(0);
+		}
+
+		/**
+		 * Constructor.
+		 * @param index int
+		 */
+		private ElementsIterator(final int index) {
+			if (index < 0 || index > size()) {
+				throw new IndexOutOfBoundsException();
+			}
+			this.currentItemInIterator = (index == size) ? null : getItemByIndex(index);
+			this.index = index;
 			this.expectedModCount = SimpleLinkedList.this.modCount;
-			// END
 		}
 
 		@Override
 		public boolean hasNext() {
-			if (expectedModCount != modCount) {
+			if (this.expectedModCount != SimpleLinkedList.this.modCount) {
 				throw new ConcurrentModificationException();
 			}
-			boolean result = nextIndex < size;
-			return result;
+			return this.index < size;
 		}
 
 		@Override
@@ -146,49 +193,20 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-			System.out.print("NEXT BEFORE:::");
-			System.out.println("lastReturned = " + lastReturnedItem
-					+ " nextItem = " + nextItem.element.toString());
-			lastReturnedItem = nextItem;
-			nextItem = nextItem.getNextNode();
-			nextIndex++;
-			System.out.print("NEXT AFTER:::");
-//			System.out.println("lastReturned = " + lastReturnedItem.element.toString()
-//					+ " nextItem = " + nextItem.element.toString());
-			return lastReturnedItem.element;
+			lastReturnedItemFromIterator = currentItemInIterator;
+			currentItemInIterator = currentItemInIterator.getNextNode();
+			index++;
+			return lastReturnedItemFromIterator.element;
 		}
 
 		@Override
 		public void remove() {
-			System.out.println("start remove");
-			System.out.println("last returned = " + lastReturnedItem.element.toString());
-			if (lastReturnedItem == null) {
+			if (lastReturnedItemFromIterator == null) {
 				throw new IllegalStateException();
 			}
-			if (lastReturnedItem.getPrevNode() == null && lastReturnedItem.getNextNode() == null) {
-				firstInList = null;
-				lastInList = null;
-			} else if (lastReturnedItem.getPrevNode() == null) {
-				System.out.println("first else");
-				firstInList = lastReturnedItem.getNextNode();
-				nextItem.prevNode = null;
-			} else if (nextItem == null) {
-				System.out.println("second else");
-				lastReturnedItem.getPrevNode().nextNode = null;
-			} else {
-				System.out.println("third else");
-				Node<T> next = nextItem;
-				Node<T> previous = lastReturnedItem.getPrevNode();
-				next.prevNode = previous;
-				previous.nextNode = next;
-			}
-			lastReturnedItem = null;
-			nextIndex--;
-			size--;
-			System.out.println("nextIndex = " + nextIndex + ". Size = " + size);
-//			System.out.println("nextItem = " + nextItem.element.toString() + ". lastReturnedItem = " + lastReturnedItem);
-			System.out.println("end remove");
-			System.out.println();
+			SimpleLinkedList.this.remove(lastReturnedItemFromIterator);
+			lastReturnedItemFromIterator = null;
+			index--;
 		}
 	}
 
