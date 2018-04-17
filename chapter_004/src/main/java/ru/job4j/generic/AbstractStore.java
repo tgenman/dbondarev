@@ -15,33 +15,38 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
 
 	@Override
 	public boolean replace(String id, T model) {
+		boolean result = false;
 		for (T item : this.container) {
 			if (item.getId().equals(id)) {
 				this.container.set(container.getIndex(item), model);
-				return true;
+				result = true;
+				break;
 			}
 		}
-		return false;
+		return result;
 	}
 
 	@Override
 	public boolean delete(String id) {
+		boolean result = false;
 		for (T item : this.container) {
 			if (item.getId().equals(id)) {
 				this.container.delete(container.getIndex(item));
-				return true;
+				result = true;
+				break;
 			}
 		}
-		return false;
+		return result;
 	}
 
 	@Override
 	public T findById(String id) {
+		T result = null;
 		for (T item : this.container) {
 			if (item.getId().equals(id)) {
-				return item;
+				result = item;
 			}
 		}
-		return null;
+		return result;
 	}
 }
