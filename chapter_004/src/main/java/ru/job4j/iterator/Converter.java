@@ -11,8 +11,8 @@ public class Converter {
 
 	/**
 	 * converter.
-	 * @param it Iterator<Iterator<Integer>>
-	 * @return Iterator<Integer>
+	 * @param it Iterator Iterator Integer
+	 * @return Iterator Integer
 	 */
 	public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
 		return new Iterator<Integer>() {

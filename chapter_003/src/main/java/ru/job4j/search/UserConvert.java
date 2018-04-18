@@ -11,7 +11,7 @@ public class UserConvert {
 	/**
 	 * Convert.
 	 * @param list Users
-	 * @return HashMap<Integer, User>
+	 * @return HashMap Integer, User
 	 */
 	public HashMap<Integer, User> process(List<User> list) {
 		HashMap<Integer, User> result = new HashMap<>();

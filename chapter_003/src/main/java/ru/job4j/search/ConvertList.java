@@ -46,9 +46,9 @@ public class ConvertList {
 	}
 
 	/**
-	 * Convert List<int[]> in List<Integer>.
-	 * @param list List<int[]>
-	 * @return List<Integer>
+	 * Convert List int[] in List Integer.
+	 * @param list List int[]
+	 * @return List Integer
 	 */
 	public List<Integer> convert(List<int[]> list) {
 		List<Integer> result = new ArrayList<>();
