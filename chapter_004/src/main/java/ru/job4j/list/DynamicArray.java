@@ -32,10 +32,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * @return boolean
 	 */
 	public boolean isEmpty() {
-		if (size == 0) {
-			return true;
-		}
-		return false;
+		return size == 0;
 	}
 
 	/**
@@ -58,9 +55,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * @param model T
 	 */
 	public void set(int index, T model) {
-		if (index < this.size) {
 			container[index] = model;
-		}
 	}
 
 	/**
@@ -93,10 +88,8 @@ public class DynamicArray<T> implements Iterable<T> {
 	 */
 	public int getIndex(T element) {
 		for (int i = 0; i < size; i++) {
-			if (container[i] == null) {
-				continue;
-			}
-			if (container[i].equals(element)) {
+			if (container[i] != null
+					&& container[i].equals(element)) {
 				return i;
 			}
 		}
