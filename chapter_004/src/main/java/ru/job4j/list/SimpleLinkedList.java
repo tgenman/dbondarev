@@ -95,6 +95,22 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		return result;
 	}
 
+	/**
+	 * Contains.
+	 * @param sample T
+	 * @return boolean
+	 */
+	public boolean contains(T sample) {
+		boolean result = false;
+		for (T item: this) {
+			if (item.equals(sample)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+
 	@Override
 	public Iterator<T> iterator() {
 		return new ElementsIterator();
