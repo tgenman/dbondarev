@@ -1,12 +1,24 @@
 package ru.job4j.tictactoe;
 
+/**
+ * Logic of game.
+ */
 public class Logic3T {
+	/** Table. */
 	private final Figure3T[][] table;
 
+	/**
+	 * Constructor.
+	 * @param table table
+	 */
 	public Logic3T(Figure3T[][] table) {
 		this.table = table;
 	}
 
+	/**
+	 * Check winning X.
+	 * @return boolean
+	 */
 	public boolean isWinnerX() {
 		boolean result = false;
 
@@ -59,6 +71,10 @@ public class Logic3T {
 		return true;
 	}
 
+	/**
+	 * Check winning O.
+	 * @return boolean
+	 */
 	public boolean isWinnerO() {
 		boolean result = false;
 
@@ -111,6 +127,10 @@ public class Logic3T {
 		return result;
 	}
 
+	/**
+	 * Check has Gap.
+	 * @return boolean
+	 */
 	public boolean hasGap() {
 		boolean result = false;
 
@@ -125,7 +145,6 @@ public class Logic3T {
 				}
 			}
 		}
-
 		return result;
 	}
 }

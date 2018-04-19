@@ -1,10 +1,16 @@
-//package ru.job4j.tictactoe;
+package ru.job4j.tictactoe;
 //
 //import org.junit.Test;
 //import static org.hamcrest.core.Is.is;
 //import static org.junit.Assert.assertThat;
 //
-//public class Logic3TTest {
+
+/**
+ * For Test.
+ */
+public class Logic3TTest {
+
+}
 //
 //	@Test
 //	public void whenHasXWinner() {

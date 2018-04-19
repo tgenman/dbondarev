@@ -16,12 +16,26 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+/**
+ * Game.
+ */
 public class TicTacToe extends Application {
-	private static final String JOB4J = "Крестики-нолики www.job4j.ru";
+	/** 1. */
+	private static final String JOB4J = "Крестики-нолики";
+	/** size. */
 	private final int size = 3;
+	/** cells. */
 	private final Figure3T[][] cells = new Figure3T[size][size];
+	/** logic. */
 	private final Logic3T logic = new Logic3T(cells);
 
+	/**
+	 * BuildReactangle.
+	 * @param x int
+	 * @param y int
+	 * @param size int
+	 * @return Figure3T
+	 */
 	private Figure3T buildRectangle(int x, int y, int size) {
 		Figure3T rect = new Figure3T();
 		rect.setX(x * size);
@@ -33,6 +47,13 @@ public class TicTacToe extends Application {
 		return rect;
 	}
 
+	/**
+	 * BuildMarkO.
+	 * @param x double
+	 * @param y double
+	 * @param size int
+	 * @return Group
+	 */
 	private Group buildMarkO(double x, double y, int size) {
 		Group group = new Group();
 		int radius = size / 2;
@@ -43,6 +64,10 @@ public class TicTacToe extends Application {
 		return group;
 	}
 
+	/**
+	 * ShowAlert.
+	 * @param message String
+	 */
 	private void showAlert(String message) {
 		Alert alert = new Alert(Alert.AlertType.WARNING);
 		alert.setTitle(JOB4J);
@@ -51,6 +76,10 @@ public class TicTacToe extends Application {
 		alert.showAndWait();
 	}
 
+	/**
+	 * CheckState.
+	 * @return boolean
+	 */
 	private boolean checkState() {
 		boolean gap = this.logic.hasGap();
 		if (!gap) {
@@ -59,6 +88,9 @@ public class TicTacToe extends Application {
 		return gap;
 	}
 
+	/**
+	 * Check Winner.
+	 */
 	private void checkWinner() {
 		if (this.logic.isWinnerX()) {
 			this.showAlert("Победили Крестики! Начните новую Игру!");
@@ -67,6 +99,13 @@ public class TicTacToe extends Application {
 		}
 	}
 
+	/**
+	 * build Mark.
+	 * @param x double
+	 * @param y double
+	 * @param size int
+	 * @return Group
+	 */
 	private Group buildMarkX(double x, double y, int size) {
 		Group group = new Group();
 		group.getChildren().addAll(
@@ -82,6 +121,11 @@ public class TicTacToe extends Application {
 		return group;
 	}
 
+	/**
+	 * BuildMouseEvent.
+	 * @param panel Group
+	 * @return EventHandler
+	 */
 	private EventHandler<MouseEvent> buildMouseEvent(Group panel) {
 		return event -> {
 			Figure3T rect = (Figure3T) event.getTarget();
@@ -102,6 +146,10 @@ public class TicTacToe extends Application {
 		};
 	}
 
+	/**
+	 * buildGrid.
+	 * @return Group
+	 */
 	private Group buildGrid() {
 		Group panel = new Group();
 		for (int y = 0; y != this.size; y++) {
