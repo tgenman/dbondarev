@@ -35,4 +35,17 @@ public class MapTest {
 		testInstance.put(two, 2);
 		System.out.println(testInstance);
 	}
+
+	/**
+	 * Test overrid equals and don't override hashCode.
+	 */
+	@Test
+	public void whenEqualsOverrideAndHashCodeDontOverride()  {
+		UserThree one = new UserThree("Ivan", 3);
+		UserThree two = new UserThree("Ivan", 3);
+		Map<UserThree, Object> testInstance = new HashMap<>();
+		testInstance.put(one, 1);
+		testInstance.put(two, 2);
+		System.out.println(testInstance);
+	}
 }
