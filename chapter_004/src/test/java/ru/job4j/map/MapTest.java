@@ -14,7 +14,7 @@ public class MapTest {
 	 * Test dont overrided equals and hashCode.
 	 */
 	@Test
-	public void whenEqualsAndHashCodeDontOverride()  {
+	public void whenEqualsAndHashCodeDontOverride() {
 		UserOne one = new UserOne("Ivan", 3);
 		UserOne two = new UserOne("Ivan", 3);
 		Map<UserOne, Object> testInstance = new HashMap<>();
@@ -27,7 +27,7 @@ public class MapTest {
 	 * Test dont overrided equals and override hashCode.
 	 */
 	@Test
-	public void whenEqualsDontOverrideAndHashCodeOverride()  {
+	public void whenEqualsDontOverrideAndHashCodeOverride() {
 		UserTwo one = new UserTwo("Ivan", 3);
 		UserTwo two = new UserTwo("Ivan", 3);
 		Map<UserTwo, Object> testInstance = new HashMap<>();
@@ -40,7 +40,7 @@ public class MapTest {
 	 * Test override equals and don't override hashCode.
 	 */
 	@Test
-	public void whenEqualsOverrideAndHashCodeDontOverride()  {
+	public void whenEqualsOverrideAndHashCodeDontOverride() {
 		UserThree one = new UserThree("Ivan", 3);
 		UserThree two = new UserThree("Ivan", 3);
 		Map<UserThree, Object> testInstance = new HashMap<>();
@@ -53,7 +53,7 @@ public class MapTest {
 	 * Test override equals and hashCode.
 	 */
 	@Test
-	public void whenEqualsAndHashCodeOverride()  {
+	public void whenEqualsAndHashCodeOverride() {
 		UserFour one = new UserFour("Ivan", 3);
 		UserFour two = new UserFour("Ivan", 3);
 		Map<UserFour, Object> testInstance = new HashMap<>();
