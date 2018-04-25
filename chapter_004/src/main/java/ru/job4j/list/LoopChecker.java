@@ -11,15 +11,18 @@ public class LoopChecker<T> {
 	 * @return boolean
 	 */
 	public boolean hasCycle(Node<T> firstInList) {
-		DynamicArray<Node<T>> buffer = new DynamicArray<>();
-		for (Node<T> currentNode = firstInList; currentNode != null; currentNode = currentNode.getNextNode()) {
-			System.out.println("element = " + currentNode.getElement());
+		if (firstInList == null) return false;
+		Node<T> turtle = firstInList;
+		Node<T> hair = firstInList;
+		while (true) {
+			turtle = turtle.getNextNode();
+			hair = hair.getNextNode();
+			if (hair == null) return false;
 
-			if (buffer.contains(currentNode)) {
-				return true;
-			}
-			buffer.add(currentNode);
+			hair = hair.getNextNode();
+			if (hair == null) return false;
+
+			if (turtle == hair) return true;
 		}
-		return false;
 	}
 }
