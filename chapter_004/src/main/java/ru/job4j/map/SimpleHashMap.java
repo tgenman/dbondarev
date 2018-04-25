@@ -9,17 +9,25 @@ import java.util.NoSuchElementException;
  * @param <K> Key
  * @param <V> Value
  */
-public class SimpleHashMap<K, V> implements Iterable<K> {
+public class SimpleHashMap<K, V> {
 	/** Size of table. */
 	private int sizeOfTable = 100;
 	/** Container of Buckets. */
-	private Pair<K, V>[] containerOfBuckets = new Pair[sizeOfTable];
+	private Object[] containerOfBuckets =  new Object[sizeOfTable];
 	/** Amount elements in map. */
 	private int countOfElements = 0;
 	/** Coefficient to increasing map. */
 	private static final double COEFFICIENT_OF_CAPACITY_MAP = 0.75;
 	/** Rate of increasing map. */
 	private static final int RATE_OF_INCREASING_MAP = 2;
+
+	/**
+	 * Size.
+	 * @return int
+	 */
+	public int size() {
+		return countOfElements;
+	}
 
 	/**
 	 * Insert.
@@ -46,9 +54,10 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 	public V get(K key) {
 		if (key == null) return null;
 		for (int i = 0; i < sizeOfTable; i++) {
-			if (containerOfBuckets[i] != null
-					&& key.equals(containerOfBuckets[i].getKey())) {
-				return containerOfBuckets[i].getValue();
+			Pair temp = (Pair) containerOfBuckets[i];
+			if (temp != null
+					&& key.equals(temp.getKey())) {
+				return temp.getValue();
 			}
 		}
 		return null;
@@ -63,14 +72,31 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 		boolean result = false;
 		if (key == null) return false;
 		for (int i = 0; i < sizeOfTable; i++) {
-			if (containerOfBuckets[i] != null
-					&& key.equals(containerOfBuckets[i].getKey())) {
+			Pair temp = (Pair) containerOfBuckets[i];
+			if (temp != null
+					&& key.equals(temp.getKey())) {
 				containerOfBuckets[i] = null;
 				result = true;
 				break;
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Contains.
+	 * @param key K
+	 * @return boolean
+	 */
+	public boolean contains(K key) {
+		if (key == null) return false;
+		Iterator<Pair> iterator = this.iterator();
+		while (iterator.hasNext()) {
+			if (key.equals(iterator.next().getKey())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -96,23 +122,27 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 	 */
 	private void increaseContainerOfBuckets() {
 		sizeOfTable = sizeOfTable * RATE_OF_INCREASING_MAP;
-		Pair[] buffer = new Pair[sizeOfTable];
+		Object[] buffer =  new Object[sizeOfTable];
 		for (int i = 0; i < containerOfBuckets.length; i++) {
 			buffer[i * 2] = containerOfBuckets[i];
 		}
 		containerOfBuckets = buffer;
 	}
 
-	@Override
-	public Iterator<K> iterator() {
-		return new MapIterator<>();
+	/**
+	 * Iterator.
+	 * @return iterator
+	 */
+	public Iterator<Pair> iterator() {
+		return new MapIterator<Pair>();
 	}
 
 	/**
 	 * MapIterator.
-	 * @param <K> K
+	 * @param <E>
 	 */
-	private class MapIterator<K> implements Iterator<K> {
+	private class MapIterator<E> implements Iterator<E> {
+
 		/** nextIndex. */
 		private int nextIndex;
 		/** last returned. */
@@ -136,10 +166,10 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 		}
 
 		@Override
-		public K next() {
+		public E next() {
 			if (!hasNext()) throw new NoSuchElementException();
 			this.lastReturned = this.nextIndex;
-			K result = (K) containerOfBuckets[nextIndex].getKey();
+			E result = (E) containerOfBuckets[nextIndex];
 			this.nextIndex = -1;
 			for (int i = lastReturned + 1; i < sizeOfTable; i++) {
 				if (containerOfBuckets[i] != null) {
@@ -152,10 +182,8 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
 	/**
 	 * Pair class.
-	 * @param <K> K
-	 * @param <V> V
 	 */
-	private class Pair<K, V> implements Map.Entry<K, V> {
+	private class Pair implements Map.Entry<K, V> {
 		/** key. */
 		private final K key;
 		/** Value. */
