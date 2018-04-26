@@ -53,14 +53,11 @@ public class SimpleHashMap<K, V> {
 	 */
 	public V get(K key) {
 		if (key == null) return null;
-		for (int i = 0; i < sizeOfTable; i++) {
-			Pair temp = (Pair) containerOfBuckets[i];
-			if (temp != null
-					&& key.equals(temp.getKey())) {
-				return temp.getValue();
-			}
+		V result = null;
+		if (containerOfBuckets[getNumberOfBucket(key)] != null) {
+			result = ((Pair) containerOfBuckets[getNumberOfBucket(key)]).getValue();
 		}
-		return null;
+		return result;
 	}
 
 	/**
@@ -71,14 +68,9 @@ public class SimpleHashMap<K, V> {
 	public boolean delete(K key) {
 		boolean result = false;
 		if (key == null) return false;
-		for (int i = 0; i < sizeOfTable; i++) {
-			Pair temp = (Pair) containerOfBuckets[i];
-			if (temp != null
-					&& key.equals(temp.getKey())) {
-				containerOfBuckets[i] = null;
-				result = true;
-				break;
-			}
+		if (containerOfBuckets[getNumberOfBucket(key)] != null) {
+			containerOfBuckets[getNumberOfBucket(key)] = null;
+			result = true;
 		}
 		return result;
 	}
