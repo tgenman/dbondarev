@@ -59,6 +59,27 @@ public class ImpTree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Check Tree to Binary.
+     * @return true if binary
+     */
+    public boolean isBinary() {
+        boolean result = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> elem = data.poll();
+            if (elem.leaves().size() > 2) {
+                result = false;
+                break;
+            }
+            for (Node<E> child : elem.leaves()) {
+                data.offer(child);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Implementation of iterator for ImpTree.
      * @param <E> type of value
      */
