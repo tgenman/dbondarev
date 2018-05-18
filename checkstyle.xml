@@ -69,6 +69,7 @@
         <module name="JavadocMethod">
             <property name="scope" value="package"/>
             <property name="allowUndeclaredRTE" value="true"/>
+            <property name="ignoreMethodNamesRegex" value="^test.*$"/>
         </module>
         <module name="JavadocType"/>
         <module name="JavadocVariable">
