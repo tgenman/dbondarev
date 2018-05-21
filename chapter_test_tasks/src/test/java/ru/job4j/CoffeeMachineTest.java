@@ -1,6 +1,7 @@
 package ru.job4j;
 
 import org.junit.Test;
+import ru.job4j.machine.CoffeeMachine;
 
 import static org.junit.Assert.assertArrayEquals;
 

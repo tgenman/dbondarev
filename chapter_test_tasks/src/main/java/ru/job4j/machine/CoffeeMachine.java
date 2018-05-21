@@ -1,4 +1,4 @@
-package ru.job4j;
+package ru.job4j.machine;
 
 /**
  * Created by tgenman on 3/26/18.
