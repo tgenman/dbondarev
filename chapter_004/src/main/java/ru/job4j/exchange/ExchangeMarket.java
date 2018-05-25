@@ -1,15 +1,14 @@
 package ru.job4j.exchange;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Modellig Exchange Market.
  */
 public class ExchangeMarket {
 
-    private final List<MarketDepth> marketDepths = new ArrayList<>();
+    private final Map<String, MarketDepth> marketDepths = new HashMap<>();
 
     /**
      * Add request for cell or buy stocks.
@@ -20,18 +19,16 @@ public class ExchangeMarket {
      * @return int id
      */
     public int addRequest(final String book,
-                           final Request.Action actionOfRequest,
-                           final int price,
-                           final int volume) {
+                          final Request.Action actionOfRequest,
+                          final int price,
+                          final int volume) {
         Request buffer = new Request(book, Request.Type.ADD, actionOfRequest, price, volume);
-        Optional<MarketDepth> targetMarketDepth = findMarketDepthByBook(book);
-        if (targetMarketDepth.isPresent()) {
-            targetMarketDepth.get().addRequest(buffer);
+        if (marketDepths.containsKey(book)) {
+            marketDepths.get(book).addRequest(buffer);
         } else {
             createNewMarketDepth(book).addRequest(buffer);
         }
         return buffer.getId();
-
     }
 
     /**
@@ -45,14 +42,11 @@ public class ExchangeMarket {
                                  final String book,
                                  final Request.Action actionOfRequest) {
         boolean result = false;
-        Optional<MarketDepth> targetMarketDepth = findMarketDepthByBook(book);
-        if (targetMarketDepth.isPresent()) {
+        if (marketDepths.containsKey(book)) {
             Request buffer = new Request(id, book, Request.Type.DELETE, actionOfRequest);
-            result = targetMarketDepth.get().removeRequest(buffer);
+            result = marketDepths.get(book).removeRequest(buffer);
         }
         return result;
-
-
     }
 
     /**
@@ -64,27 +58,28 @@ public class ExchangeMarket {
     }
 
     /**
-     * Get list of companies.
-     * @return list of companies.
+     * Get Market by name.
+     * @param book name of company
+     * @return Market Depth.
      */
-    public List<MarketDepth> getMarketDepths() {
-        return this.marketDepths;
+    public MarketDepth getMarketDepths(final String book) {
+        return this.marketDepths.get(book);
     }
 
-    private Optional<MarketDepth> findMarketDepthByBook(final String book) {
-        Optional<MarketDepth> result = Optional.empty();
-        for (MarketDepth market : marketDepths) {
-            if (market.getName().equals(book)) {
-                result = Optional.of(market);
-                break;
-            }
-        }
-        return result;
-    }
+//    private Optional<MarketDepth> findMarketDepthByBook(final String book) {
+//        Optional<MarketDepth> result = Optional.empty();
+//        for (MarketDepth market : marketDepths) {
+//            if (market.getName().equals(book)) {
+//                result = Optional.of(market);
+//                break;
+//            }
+//        }
+//        return result;
+//    }
 
     private MarketDepth createNewMarketDepth(final String book) {
         MarketDepth newMarketDepthByBook = new MarketDepth(book);
-        marketDepths.add(newMarketDepthByBook);
+        marketDepths.put(book, newMarketDepthByBook);
         return newMarketDepthByBook;
     }
 

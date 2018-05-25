@@ -29,16 +29,18 @@ public class ExchangeMarketTest {
         int idOne = testInstance.addRequest("MIT", Request.Action.ASK, 120, 10);
         int idTwo = testInstance.addRequest("MIT", Request.Action.BID, 910, 10);
 
-        assertEquals(4, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getAskSet().size());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getBidSet().size());
+        MarketDepth testMarketDepth = testInstance.getMarketDepths("MIT");
+
+        assertEquals(4, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getAskSet().size());
+        assertEquals(2, testMarketDepth.getBidSet().size());
 
         testInstance.deleteRequest(idOne, "MIT", Request.Action.ASK);
         testInstance.deleteRequest(idTwo, "MIT", Request.Action.BID);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getAskSet().size());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getBidSet().size());
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(1, testMarketDepth.getAskSet().size());
+        assertEquals(1, testMarketDepth.getBidSet().size());
     }
 
     @Test
@@ -48,14 +50,16 @@ public class ExchangeMarketTest {
         testInstance.addRequest("MIT", Request.Action.BID, 90, 10);
         testInstance.addRequest("MIT", Request.Action.BID, 105, 10);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getBidSet().size());
+        MarketDepth testMarketDepth = testInstance.getMarketDepths("MIT");
+
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getBidSet().size());
 
         testInstance.addRequest("MIT", Request.Action.ASK, 100, 25);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getBidSet().size());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getAskSet().size());
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(1, testMarketDepth.getBidSet().size());
+        assertEquals(1, testMarketDepth.getAskSet().size());
     }
 
     @Test
@@ -65,14 +69,16 @@ public class ExchangeMarketTest {
         testInstance.addRequest("MIT", Request.Action.BID, 90, 25);
         testInstance.addRequest("MIT", Request.Action.BID, 105, 25);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getBidSet().size());
+        MarketDepth testMarketDepth = testInstance.getMarketDepths("MIT");
+
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getBidSet().size());
 
         testInstance.addRequest("MIT", Request.Action.ASK, 100, 10);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getBidSet().size());
-        assertEquals(0, testInstance.getMarketDepths().get(0).getAskSet().size());
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getBidSet().size());
+        assertEquals(0, testMarketDepth.getAskSet().size());
     }
 
     @Test
@@ -82,14 +88,16 @@ public class ExchangeMarketTest {
         testInstance.addRequest("MIT", Request.Action.ASK, 90, 25);
         testInstance.addRequest("MIT", Request.Action.ASK, 105, 10);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getAskSet().size());
+        MarketDepth testMarketDepth = testInstance.getMarketDepths("MIT");
+
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getAskSet().size());
 
         testInstance.addRequest("MIT", Request.Action.BID, 100, 25);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getBidSet().size());
-        assertEquals(1, testInstance.getMarketDepths().get(0).getAskSet().size());
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(1, testMarketDepth.getBidSet().size());
+        assertEquals(1, testMarketDepth.getAskSet().size());
     }
 
     @Test
@@ -99,14 +107,16 @@ public class ExchangeMarketTest {
         testInstance.addRequest("MIT", Request.Action.ASK, 90, 25);
         testInstance.addRequest("MIT", Request.Action.ASK, 105, 25);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getAskSet().size());
+        MarketDepth testMarketDepth = testInstance.getMarketDepths("MIT");
+
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(2, testMarketDepth.getAskSet().size());
 
         testInstance.addRequest("MIT", Request.Action.BID, 100, 10);
 
-        assertEquals(2, testInstance.getMarketDepths().get(0).getSizeOfMarketDepth());
-        assertEquals(0, testInstance.getMarketDepths().get(0).getBidSet().size());
-        assertEquals(2, testInstance.getMarketDepths().get(0).getAskSet().size());
+        assertEquals(2, testMarketDepth.getSizeOfMarketDepth());
+        assertEquals(0, testMarketDepth.getBidSet().size());
+        assertEquals(2, testMarketDepth.getAskSet().size());
     }
 
     @Test
@@ -116,6 +126,6 @@ public class ExchangeMarketTest {
         testInstance.addRequest("MIT", Request.Action.ASK, 90, 25);
         testInstance.addRequest("Harvard", Request.Action.ASK, 105, 25);
 
-        assertEquals(2, testInstance.getMarketDepths().size());
+        assertEquals(2, testInstance.getNumberMarketDepths());
     }
 }
