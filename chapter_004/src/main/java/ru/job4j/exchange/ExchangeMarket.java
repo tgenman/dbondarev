@@ -66,17 +66,6 @@ public class ExchangeMarket {
         return this.marketDepths.get(book);
     }
 
-//    private Optional<MarketDepth> findMarketDepthByBook(final String book) {
-//        Optional<MarketDepth> result = Optional.empty();
-//        for (MarketDepth market : marketDepths) {
-//            if (market.getName().equals(book)) {
-//                result = Optional.of(market);
-//                break;
-//            }
-//        }
-//        return result;
-//    }
-
     private MarketDepth createNewMarketDepth(final String book) {
         MarketDepth newMarketDepthByBook = new MarketDepth(book);
         marketDepths.put(book, newMarketDepthByBook);
