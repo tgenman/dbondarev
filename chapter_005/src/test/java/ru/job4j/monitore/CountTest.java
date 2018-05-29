@@ -4,10 +4,13 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Count Test.
+ */
 public class CountTest {
 
     /**
-     * Thread with Count
+     * Thread with Count.
      */
     private class ThreadCount extends Thread {
         private final Count count;
@@ -23,7 +26,7 @@ public class CountTest {
     }
 
     @Test
-    public void whenExecute2ThreadThen2() throws InterruptedException {
+    public void testWhenExecute2ThreadThen2() throws InterruptedException {
         final Count count = new Count();
 
         Thread first = new ThreadCount(count);
