@@ -1,5 +1,8 @@
 package ru.job4j.list;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -8,9 +11,11 @@ import java.util.NoSuchElementException;
  * Created by tgenman on 4/13/18.
  * @param <T> T
  */
+@ThreadSafe
 public class DynamicArray<T> implements Iterable<T> {
 
 	/**Container. */
+	@GuardedBy("this")
 	private T[] container = (T[]) new Object[1];
 
 	/** Size. */
@@ -39,7 +44,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * add.
 	 * @param model T
 	 */
-	public void add(T model) {
+	public synchronized void add(T model) {
 		if (container.length == size) {
 			final T[] oldM = container;
 			container = (T[]) new Object[this.size() * 2];
@@ -54,7 +59,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * @param index int
 	 * @param model T
 	 */
-	public void set(int index, T model) {
+	public synchronized void set(int index, T model) {
 			container[index] = model;
 	}
 
@@ -62,7 +67,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * Delete.
 	 * @param index int.
 	 */
-	public void delete(int index) {
+	public synchronized void delete(int index) {
 		if (index < this.size) {
 			if (index != this.size - 1) {
 				System.arraycopy(container, index + 1, container, index, this.size() - index - 1);
@@ -77,7 +82,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * @param index int
 	 * @return T
 	 */
-	public T get(int index) {
+	public synchronized T get(int index) {
 		return container[index];
 	}
 
@@ -86,7 +91,7 @@ public class DynamicArray<T> implements Iterable<T> {
 	 * @param element T
 	 * @return int
 	 */
-	public int getIndex(T element) {
+	public synchronized int getIndex(T element) {
 		for (int i = 0; i < size; i++) {
 			if (container[i] != null
 					&& container[i].equals(element)) {
@@ -120,19 +125,17 @@ public class DynamicArray<T> implements Iterable<T> {
 	/**
 	 * Iterator.
 	 */
-
+	@ThreadSafe
 	private class DynamicArrayIterator implements Iterator {
 
 		/** Index. */
+		@GuardedBy("this")
 		private int index;
-
-		/** Index of last returned. */
-		private int last = -1;
 
 		/**
 		 * Value of count when create iterator.
 		 */
-		private int expectedModCount;
+		private final int expectedModCount;
 
 		/**
 		 * Constructor.
@@ -142,7 +145,7 @@ public class DynamicArray<T> implements Iterable<T> {
 		}
 
 		@Override
-		public boolean hasNext() {
+		public synchronized boolean hasNext() {
 			if (expectedModCount != modCount) {
 				throw new ConcurrentModificationException();
 			}
@@ -150,12 +153,14 @@ public class DynamicArray<T> implements Iterable<T> {
 		}
 
 		@Override
-		public T next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
+		public synchronized T next() {
+			synchronized (DynamicArray.this) {
+				if (!hasNext()) {
+					throw new NoSuchElementException();
+				}
+				return DynamicArray.this.container[index++];
 			}
-			last = index;
-			return DynamicArray.this.container[index++];
+
 		}
 	}
 }

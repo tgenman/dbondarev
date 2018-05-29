@@ -1,5 +1,8 @@
 package ru.job4j.list;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -8,14 +11,18 @@ import java.util.NoSuchElementException;
  * Created by tgenman on 4/13/18.
  * @param <T> T
  */
+@ThreadSafe
 public class SimpleLinkedList<T> implements Iterable<T> {
 	/** Link to first Node. */
+	@GuardedBy("this")
 	private Node<T> firstInList = null;
 
 	/** Link to last Node. */
+	@GuardedBy("this")
 	private Node<T> lastInList = null;
 
 	/** Size. */
+	@GuardedBy("this")
 	private int size;
 
 	/** Counter of modifications. */
@@ -25,7 +32,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	 * Size.
 	 * @return int size
 	 */
-	public int size() {
+	public synchronized int size() {
 		return this.size;
 	}
 
@@ -42,7 +49,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	 * @param newElement T
 	 * @return boolean
 	 */
-	public boolean add(final T newElement) {
+	public synchronized boolean add(final T newElement) {
 		if (firstInList == null
 				&& lastInList == null) {
 			Node<T> temp = new Node<>(newElement, null, null);
@@ -78,7 +85,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	 * @param index int
 	 * @return T
 	 */
-	public T get(final int index) {
+	public synchronized T get(final int index) {
 		if (index >= size || index < 0) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -121,7 +128,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	 * @param index int
 	 * @return Node<T>
 	 */
-	private Node<T> getItemByIndex(final int index) {
+	private synchronized Node<T> getItemByIndex(final int index) {
 		int i = 0;
 		Node<T> current = firstInList;
 		while (i != index) {
@@ -135,7 +142,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	 * Private method to delete Node.
 	 * @param current Node<T>
 	 */
-	private void remove(final Node<T> current) {
+	private synchronized void remove(final Node<T> current) {
 		if (current != null) {
 			if (this.size() == 1) {
 				this.firstInList = null;
@@ -161,14 +168,18 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 	/**
 	 * Iterator.
 	 */
+	@ThreadSafe
 	private class ElementsIterator implements Iterator<T> {
 		/** Link to first Node. */
+		@GuardedBy("this")
 		private Node<T> currentItemInIterator;
 
 		/** Link to last returned Node. */
+		@GuardedBy("this")
 		private Node<T> lastReturnedItemFromIterator;
 
 		/** Index of next Node. */
+		@GuardedBy("this")
 		private int index;
 
 		/**
@@ -197,15 +208,17 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		}
 
 		@Override
-		public boolean hasNext() {
-			if (this.expectedModCount != SimpleLinkedList.this.modCount) {
-				throw new ConcurrentModificationException();
+		public synchronized boolean hasNext() {
+			synchronized (SimpleLinkedList.this) {
+				if (this.expectedModCount != SimpleLinkedList.this.modCount) {
+					throw new ConcurrentModificationException();
+				}
+				return this.index < size;
 			}
-			return this.index < size;
 		}
 
 		@Override
-		public T next() {
+		public synchronized T next() {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
@@ -216,7 +229,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
 		}
 
 		@Override
-		public void remove() {
+		public synchronized void remove() {
 			if (lastReturnedItemFromIterator == null) {
 				throw new IllegalStateException();
 			}
